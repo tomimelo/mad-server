@@ -1,0 +1,38 @@
+{
+  "name": "mad-server",
+  "version": "1.0.0",
+  "description": "Http Server based on express",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomimelo/mad-server.git"
+  },
+  "keywords": [
+    "express",
+    "server",
+    "http",
+    "api",
+    "router",
+    "class",
+    "controller",
+    "routes",
+    "logger"
+  ],
+  "author": "Tomás Melone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomimelo/mad-server/issues"
+  },
+  "homepage": "https://github.com/tomimelo/mad-server#readme",
+  "files": [
+    "lib/**/*"
+  ],
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
