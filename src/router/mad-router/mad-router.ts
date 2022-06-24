@@ -1,7 +1,7 @@
 import { Router as ExpressRouter } from 'express'
 import { MadRoute } from './mad-route';
 import { MadRouteDescription } from './mad-route-description';
-import { MadRouterOptions } from './mad-route-options';
+import { MadRouterConfig } from './mad-router-config';
 import { Router } from '../router'
 
 export class MadRouter implements Router {
@@ -9,7 +9,7 @@ export class MadRouter implements Router {
   private basePath: string;
   private routes: Array<MadRouteDescription> = [];
   private name: string;
-  constructor (private readonly routerOptions: MadRouterOptions) {
+  constructor (private readonly routerOptions: MadRouterConfig) {
     this.basePath = this.routerOptions.basePath
     this.name = this.routerOptions.name || ''
     this.setupRouter()

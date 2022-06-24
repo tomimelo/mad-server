@@ -1,11 +1,11 @@
 import { RouterOptions as ExpressRouterOptions } from 'express'
-import { Middleware } from '../../middleware/middleware'
+import { MadHandler } from './mad-handler'
 import { MadRoute } from './mad-route'
 import { Router } from '../router'
 
-export interface MadRouterOptions {
+export interface MadRouterConfig {
   options?: ExpressRouterOptions,
-  preMiddlewares?: ReadonlyArray<Middleware>,
+  preMiddlewares?: ReadonlyArray<MadHandler>,
   basePath: string,
   name?: string,
   handlers: ReadonlyArray<MadRoute | Router>
