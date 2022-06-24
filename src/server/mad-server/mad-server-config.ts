@@ -1,3 +1,4 @@
+import { MadErrorHandler } from '../../router/mad-router/mad-error-handler'
 import { MadHandler } from '../../router/mad-router/mad-handler'
 import { MadRouteDescription } from '../../router/mad-router/mad-route-description'
 import { Router } from '../../router/router'
@@ -8,7 +9,7 @@ export interface MadServerConfig {
   router: Router,
   parseJson?: boolean,
   preMiddlewares?: ReadonlyArray<MadHandler>,
-  postMiddlewares?: ReadonlyArray<MadHandler>,
+  postMiddlewares?: ReadonlyArray<MadHandler | MadErrorHandler>,
   logger?: Logger,
   routePrinter?: (routes: ReadonlyArray<MadRouteDescription>) => void
 }
