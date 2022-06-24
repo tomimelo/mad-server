@@ -5,7 +5,7 @@ import { MadServerConfig } from './mad-server-config'
 import { Logger } from '../../utils/logger'
 import { ConsoleLogger } from '../../utils/console-logger'
 import { Router } from '../../router/router'
-import { RouteDescription } from '../../router/route-description'
+import { MadRouteDescription } from '../../router/mad-router/mad-route-description'
 
 export class MadServer implements Server {
   private app: express.Application = express()
@@ -42,22 +42,26 @@ export class MadServer implements Server {
   }
 
   private setPreMiddlewares(): void {
-    this.config.preMiddlewares.forEach(middleware => {
-      this.app.use(middleware)
-    })
+    if (this.config.preMiddlewares) {
+      this.config.preMiddlewares.forEach(middleware => {
+        this.app.use(middleware)
+      })
+    }
   }
 
   private setPostMiddlewares(): void {
-    this.config.postMiddlewares.forEach(middleware => {
-      this.app.use(middleware)
-    })
+    if (this.config.postMiddlewares) {
+      this.config.postMiddlewares.forEach(middleware => {
+        this.app.use(middleware)
+      })
+    }
   }
 
   private initRouter(): void {
     this.app.use(this.router.getBasePath(), this.router.getRouter())
   }
 
-  public getRoutes(): ReadonlyArray<RouteDescription> {
+  public getRoutes(): ReadonlyArray<MadRouteDescription> {
     return this.router.getRoutes()
   }
 

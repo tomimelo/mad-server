@@ -1,5 +1,5 @@
 import { Router as ExpressRouter} from "express";
-import { RouteDescription } from "./route-description";
+import { MadRouteDescription } from "./mad-router/mad-route-description";
 
 export abstract class Router {
   public getBasePath(): string {
@@ -8,7 +8,7 @@ export abstract class Router {
   public getRouter(): ExpressRouter {
     throw new Error('Method not implemented')
   }
-  public getRoutes(): ReadonlyArray<RouteDescription> {
+  public getRoutes(): ReadonlyArray<MadRouteDescription> {
     throw new Error('Method not implemented')
   }
 }

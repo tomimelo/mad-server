@@ -1,15 +1,15 @@
 import { Router as ExpressRouter } from 'express'
-import { Route } from '../route';
-import { RouteDescription } from '../route-description';
-import { RouterOptions } from '../route-options';
+import { MadRoute } from './mad-route';
+import { MadRouteDescription } from './mad-route-description';
+import { MadRouterOptions } from './mad-route-options';
 import { Router } from '../router'
 
 export class MadRouter implements Router {
   private router: ExpressRouter = ExpressRouter()
   private basePath: string;
-  private routes: Array<RouteDescription> = [];
+  private routes: Array<MadRouteDescription> = [];
   private name: string;
-  constructor (private readonly routerOptions: RouterOptions) {
+  constructor (private readonly routerOptions: MadRouterOptions) {
     this.basePath = this.routerOptions.basePath
     this.name = this.routerOptions.name || ''
     this.setupRouter()
@@ -23,7 +23,7 @@ export class MadRouter implements Router {
     return this.router
   }
 
-  public getRoutes (): ReadonlyArray<RouteDescription> {
+  public getRoutes (): ReadonlyArray<MadRouteDescription> {
     return this.routes
   }
 
@@ -38,16 +38,16 @@ export class MadRouter implements Router {
         assertRouterHandlerIsRoute(routerHandler)
         switch (routerHandler.method.toUpperCase()) {
           case 'GET':
-            this.router.get(routerHandler.path, ...[...routerHandler.middlewares, routerHandler.handler])
+            this.router.get(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
           case 'POST':
-            this.router.post(routerHandler.path, ...[...routerHandler.middlewares, routerHandler.handler])
+            this.router.post(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
           case 'PUT':
-            this.router.put(routerHandler.path, ...[...routerHandler.middlewares, routerHandler.handler])
+            this.router.put(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
           case 'DELETE':
-            this.router.delete(routerHandler.path, ...[...routerHandler.middlewares, routerHandler.handler])
+            this.router.delete(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
           default:
             throw new Error(`Method ${routerHandler.method.toUpperCase()} not supported.`)
@@ -59,7 +59,7 @@ export class MadRouter implements Router {
   }
 
 
-  private createRouteDescription (route: Route): RouteDescription {
+  private createRouteDescription (route: MadRoute): MadRouteDescription {
     return {
       path: route.path,
       method: route.method,
@@ -72,7 +72,7 @@ export class MadRouter implements Router {
     return this.name ? `${this.name}.${handlerName}` : handlerName
   }
 
-  private addRoute (routeDescription: RouteDescription): void {
+  private addRoute (routeDescription: MadRouteDescription): void {
     this.routes.push({
       method: routeDescription.method.toUpperCase(),
       path: `${this.basePath}${routeDescription.path}`,
@@ -81,7 +81,7 @@ export class MadRouter implements Router {
   }
 }
 
-function assertRouterHandlerIsRoute(routerHandler: Route | Router): asserts routerHandler is Route {
+function assertRouterHandlerIsRoute(routerHandler: MadRoute | Router): asserts routerHandler is MadRoute {
   if (routerHandler instanceof Router) {
     throw Error('routerHandle must be of type Route');
   }
