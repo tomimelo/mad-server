@@ -29,7 +29,7 @@ export class MadRouter implements Router {
 
   private setupRouter (): void {
     this.routerOptions.handlers.forEach(routerHandler => {
-      if (routerHandler instanceof Router) {
+      if (routerHandler instanceof MadRouter) {
         this.router.use(routerHandler.getBasePath(), routerHandler.getRouter())
         routerHandler.getRoutes().forEach(route => {
           this.addRoute(route)
@@ -82,7 +82,7 @@ export class MadRouter implements Router {
 }
 
 function assertRouterHandlerIsRoute(routerHandler: MadRoute | Router): asserts routerHandler is MadRoute {
-  if (routerHandler instanceof Router) {
+  if (routerHandler instanceof MadRouter) {
     throw Error('routerHandle must be of type Route');
   }
 }
