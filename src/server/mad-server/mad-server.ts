@@ -42,6 +42,9 @@ export class MadServer implements Server {
   }
 
   private setPreMiddlewares(): void {
+    if (this.config.parseJson !== false) {
+      this.app.use(express.json())
+    }
     if (this.config.preMiddlewares) {
       this.config.preMiddlewares.forEach(middleware => {
         this.app.use(middleware)

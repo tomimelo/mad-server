@@ -6,6 +6,7 @@ import { Logger } from '../../utils/logger'
 export interface MadServerConfig {
   port: number,
   router: Router,
+  parseJson?: boolean,
   preMiddlewares?: ReadonlyArray<MadHandler>,
   postMiddlewares?: ReadonlyArray<MadHandler>,
   logger?: Logger,
