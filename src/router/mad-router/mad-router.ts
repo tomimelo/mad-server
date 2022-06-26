@@ -6,17 +6,17 @@ import { Router } from '../router'
 
 export class MadRouter implements Router {
   private router: ExpressRouter = ExpressRouter()
-  private basePath: string;
+  private baseUrl: string;
   private routes: Array<MadRouteDescription> = [];
   private name: string;
   constructor (private readonly routerOptions: MadRouterConfig) {
-    this.basePath = this.routerOptions.basePath
+    this.baseUrl = this.routerOptions.baseUrl
     this.name = this.routerOptions.name || ''
     this.setupRouter()
   }
 
-  public getBasePath (): string {
-    return this.basePath
+  public getBaseUrl (): string {
+    return this.baseUrl
   }
 
   public getRouter (): ExpressRouter {
@@ -30,7 +30,7 @@ export class MadRouter implements Router {
   private setupRouter (): void {
     this.routerOptions.handlers.forEach(routerHandler => {
       if (routerHandler instanceof MadRouter) {
-        this.router.use(routerHandler.getBasePath(), routerHandler.getRouter())
+        this.router.use(routerHandler.getBaseUrl(), routerHandler.getRouter())
         routerHandler.getRoutes().forEach(route => {
           this.addRoute(route)
         })
@@ -75,7 +75,7 @@ export class MadRouter implements Router {
   private addRoute (routeDescription: MadRouteDescription): void {
     this.routes.push({
       method: routeDescription.method.toUpperCase(),
-      path: `${this.basePath}${routeDescription.path}`,
+      path: `${this.baseUrl}${routeDescription.path}`,
       handler: routeDescription.handler
     })
   }

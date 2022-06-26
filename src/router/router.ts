@@ -2,7 +2,7 @@ import { Router as ExpressRouter} from "express";
 import { MadRouteDescription } from "./mad-router/mad-route-description";
 
 export interface Router {
-  getBasePath(): string,
+  getBaseUrl(): string,
   getRouter(): ExpressRouter,
   getRoutes(): ReadonlyArray<MadRouteDescription>
 }

@@ -6,7 +6,7 @@ import { Router } from '../router'
 export interface MadRouterConfig {
   options?: ExpressRouterOptions,
   preMiddlewares?: ReadonlyArray<MadHandler>,
-  basePath: string,
+  baseUrl: string,
   name?: string,
   handlers: ReadonlyArray<MadRoute | Router>
 }
