@@ -21,6 +21,10 @@ export class MadServer implements Server {
     this.init()
   }
 
+  public getApp(): express.Application {
+    return this.app
+  }
+
   public async start(): Promise<void> {
     return new Promise<void>((resolve) => {
       this.app.listen(this.port, () => {
