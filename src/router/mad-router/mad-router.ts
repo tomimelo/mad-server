@@ -82,8 +82,8 @@ export class MadRouter implements Router {
   }
 }
 
-function assertRouterHandlerIsRoute(routerHandler: MadRoute | Router): asserts routerHandler is MadRoute {
+function assertRouterHandlerIsRoute(routerHandler: MadRoute | MadRouter): asserts routerHandler is MadRoute {
   if (routerHandler instanceof MadRouter) {
-    throw Error('routerHandle must be of type Route');
+    throw Error('routerHandler must be of type MadRoute');
   }
 }
