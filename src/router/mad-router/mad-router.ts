@@ -3,6 +3,7 @@ import { MadRoute } from './mad-route';
 import { MadRouteDescription } from './mad-route-description';
 import { MadRouterConfig } from './mad-router-config';
 import { Router } from '../router'
+import { MadRouteMethod } from './mad-route-method';
 
 export class MadRouter implements Router {
   private router: ExpressRouter = ExpressRouter()
@@ -37,16 +38,16 @@ export class MadRouter implements Router {
       } else {
         assertRouterHandlerIsRoute(routerHandler)
         switch (routerHandler.method.toUpperCase()) {
-          case 'GET':
+          case MadRouteMethod.GET:
             this.router.get(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
-          case 'POST':
+          case MadRouteMethod.POST:
             this.router.post(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
-          case 'PUT':
+          case MadRouteMethod.PUT:
             this.router.put(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
-          case 'DELETE':
+          case MadRouteMethod.DELETE:
             this.router.delete(routerHandler.path, ...(routerHandler.middlewares || []), routerHandler.handler)
             break
           default:
