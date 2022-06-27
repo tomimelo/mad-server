@@ -65,7 +65,7 @@ export class MadServer implements Server {
   }
 
   private initRouter(): void {
-    this.app.use(this.router.getBaseUrl(), this.router.getRouter())
+    this.app.use(this.router.getBasePath(), this.router.getRouter())
   }
 
   public getRoutes(): ReadonlyArray<MadRouteDescription> {
