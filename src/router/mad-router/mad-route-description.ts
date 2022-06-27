@@ -1,5 +1,7 @@
+import { MadRouteMethod } from "./mad-route-method";
+
 export interface MadRouteDescription {
   path: string,
-  method: string,
+  method: MadRouteMethod,
   handler: string
 }

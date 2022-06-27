@@ -75,7 +75,7 @@ export class MadRouter implements Router {
 
   private addRoute (routeDescription: MadRouteDescription): void {
     this.routes.push({
-      method: routeDescription.method.toUpperCase(),
+      method: routeDescription.method,
       path: `${this.basePath}${routeDescription.path}`,
       handler: routeDescription.handler
     })
